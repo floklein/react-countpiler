@@ -8,13 +8,13 @@ import {
 } from "react";
 
 const context = createContext<{
-  count: number;
-  setCount: Dispatch<SetStateAction<number>>;
+  count1: number;
+  setCount1: Dispatch<SetStateAction<number>>;
   count2: number;
   setCount2: Dispatch<SetStateAction<number>>;
 }>({
-  count: 0,
-  setCount: () => {},
+  count1: 0,
+  setCount1: () => {},
   count2: 0,
   setCount2: () => {},
 });
@@ -26,7 +26,7 @@ function Header() {
 
   return (
     <header>
-      <h1>Count 2: {count2}</h1>
+      <h1>Header - count2: {count2}</h1>
     </header>
   );
 }
@@ -41,7 +41,7 @@ function Footer({ increment }: { increment: () => void }) {
   return (
     <footer>
       <h2>Footer</h2>
-      <button onClick={increment}>Increment 1</button>
+      <button onClick={increment}>count1++</button>
     </footer>
   );
 }
@@ -49,20 +49,21 @@ function Footer({ increment }: { increment: () => void }) {
 export function App() {
   console.log("App", Math.random());
 
-  const [count, setCount] = useState(0);
+  const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
 
   function increment() {
-    setCount((c) => c + 1);
+    setCount1((c) => c + 1);
   }
 
   return (
-    <context.Provider value={{ count, setCount, count2, setCount2 }}>
+    <context.Provider value={{ count1, setCount1, count2, setCount2 }}>
       <Header />
       <main>
-        <p>Count 1: {count}</p>
-        <p>Count 2: {count2}</p>
-        <button onClick={increment}>Increment 1</button>
+        <p>
+          count1: {count1} <button onClick={increment}>count1++</button>
+        </p>
+        <p>count2: {count2}</p>
       </main>
       <Footer increment={increment} />
     </context.Provider>
